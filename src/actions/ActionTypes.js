@@ -12,8 +12,8 @@ export function fetchWeather(city='London') {
   xhr.send();
 
   let request = '';
-  if (xhr.status != 200) {
-    alert( xhr.status + ': ' + xhr.statusText );
+  if (xhr.status !== 200) {
+    console.error( xhr.status + ': ' + xhr.statusText );
   } else {
     request = xhr.responseText;
     return {
@@ -21,5 +21,4 @@ export function fetchWeather(city='London') {
       payload: request
     };
   }
-
 }
