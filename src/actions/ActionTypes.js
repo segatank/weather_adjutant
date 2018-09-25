@@ -7,7 +7,7 @@ export const FETCH_WEATHER = "FETCH_WEATHER";
 export function fetchWeather(city='London') {
   const url = `${ROOT_URL}&q=${city},us`;
   let xhr = new XMLHttpRequest();
-console.log(url)
+//console.log(url)
   xhr.open('GET', url, false);
   xhr.send();
 
@@ -15,8 +15,8 @@ console.log(url)
   if (xhr.status !== 200) {
     console.error( `Api warning: ${xhr.status} ${xhr.statusText}` );
   } else {
-    request = xhr.responseText;
-    console.log(request )
+    request = JSON.parse(xhr.responseText);
+
     return {
       type: FETCH_WEATHER,
       payload: request

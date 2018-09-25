@@ -17,7 +17,6 @@ class SearchField extends Component {
   }
 
   handlerButtonClick (event) {
-    //this.props.fetchWeather('Vena')
     this.setState({ city: "" });
     this.props.fetchWeather(this.state.city);
   }
@@ -34,13 +33,12 @@ class SearchField extends Component {
     if (event.target.value.length > 0) {
       console.log(event.target.value);
       this.setState({ city: event.target.value });
-      this.props.fetchWeather(this.state.city)
-      //document.getElementById("citySearchField").value = '';
+      this.props.fetchWeather(this.state.city);
     }
   }
 
   render() {
-    console.log(this.props)
+    //console.log(this.props)
     return (
       <Fragment>
         <input
@@ -65,4 +63,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(SearchField);
-//export default SearchField;
