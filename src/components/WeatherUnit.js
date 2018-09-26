@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
-
+import SingleDayWeather from './SingleDayWeather';
 
 class WeatherUnit extends Component {
 
@@ -42,12 +42,16 @@ class WeatherUnit extends Component {
       }
     }
 
+    // return (
+    //   <tr key={name}>
+    //     <td>{temps}  units="K" </td>
+    //     <td>{pressures} units="hPa" </td>
+    //     <td>{humidities} units="%" </td>
+    //   </tr>
+    // );
     return (
       <tr key={name}>
-
-        <td>{temps}  units="K" </td>
-        <td>{pressures} units="hPa" </td>
-        <td>{humidities} units="%" </td>
+        <SingleDayWeather weatherPerDay={daysCluster[0]}/>
       </tr>
     );
   }
@@ -69,7 +73,6 @@ class WeatherUnit extends Component {
           <table className="table table-hover">
             <thead>
               <tr>
-                <th>City</th>
                 <th>Temperature (C)</th>
                 <th>Pressure (hPa)</th>
                 <th>Humidity (%)</th>
