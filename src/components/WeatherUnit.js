@@ -1,38 +1,68 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 
+
 class WeatherUnit extends Component {
-//
+
   renderWeather(cityData) {
     console.log(cityData)
     const name = cityData.city.name;
     const temps = cityData.list.map(weather => weather.main.temp);
     const pressures = cityData.list.map(weather => weather.main.pressure);
     const humidities = cityData.list.map(weather => weather.main.humidity);
-    const { lon, lat } = cityData.city.coord;
+
+    const weatherDataFromApi = cityData.list;
+    const daysCluster = [];
+    const NUMBER_OF_DAYS = 5;
+
+    for (let counter = 0; counter < NUMBER_OF_DAYS; counter++) {
+      daysCluster.push([]);
+    }
+    console.log(daysCluster)
+
+
+    let beginDate = new Date(weatherDataFromApi[0].dt_txt);
+    let currDate;
+    let startCounter = 0;
+
+    //for (let i=0; i < 20; i++) {
+    for (let i=0; i < weatherDataFromApi.length; i++) {
+      currDate = new Date(weatherDataFromApi[i].dt_txt);
+
+      if (beginDate.getDate() === currDate.getDate()) {
+        daysCluster[startCounter].push(weatherDataFromApi[i]);
+      } else {
+        startCounter++;
+        if (startCounter < NUMBER_OF_DAYS) {
+          beginDate = currDate;
+          daysCluster[startCounter].push(weatherDataFromApi[i]);
+        } else {
+          break;
+        }
+      }
+    }
 
     return (
       <tr key={name}>
-        <td> lon={lon} lat={lat} </td>
+
         <td>{temps}  units="K" </td>
         <td>{pressures} units="hPa" </td>
         <td>{humidities} units="%" </td>
       </tr>
     );
   }
-//
+
 
   render() {
     const noCityName = "Nothing to show. Please enter city name.";
     console.log(this.props)
-    console.log(this.props.weather)
+    //console.log(this.props.weather)
 
     if (!this.props.weather) {
       return <div>{noCityName}</div>
     }
     //const { temp, cloudiness, wind, preassure } = this.props.weather;
-  //  const { list } = this.props.weather.list;
-    //console.log(list)
+
     return (
       <Fragment>
           <div>Day # </div>
@@ -40,7 +70,7 @@ class WeatherUnit extends Component {
             <thead>
               <tr>
                 <th>City</th>
-                <th>Temperature (K)</th>
+                <th>Temperature (C)</th>
                 <th>Pressure (hPa)</th>
                 <th>Humidity (%)</th>
               </tr>
