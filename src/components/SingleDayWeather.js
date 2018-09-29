@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 
-const FROM_KELVIN_TO_Celsius = 273.15;
+const FROM_KELVIN_TO_Celsius = 273;
 const convertToCelcius = (kelvin) => {
   return kelvin - FROM_KELVIN_TO_Celsius
 }
@@ -13,53 +13,39 @@ class SingleDayWeather extends Component {
 
   getAverageResults () {
     return  {
-      temperature: this.getAverageTemperature (),
-      pressure: this.getAveragePressure (),
-      humidity: this.getAverageHumidity ()
+      day: this.getDay(),
+      temperature: convertToCelcius(this.getAverageWeatherResult ('temp')),
+      pressure: this.getAverageWeatherResult ('pressure'),
+      humidity: this.getAverageWeatherResult ('humidity')
     }
   }
 
-  getAverageTemperature () {
-      console.log(this.props)
-      const apiDayArr = this.props.weatherPerDay;
-      let avgTempResult = 0;
-      apiDayArr.forEach(function(item) {
-        avgTempResult += convertToCelcius(item.main.temp);
-      });
-
-      return Math.round(avgTempResult / apiDayArr.length)
+  getDay () {
+    const apiDayArr = this.props.weatherPerDay;
+    const day = new Date(apiDayArr[0].dt_txt);
+    return day.getDate();
   }
 
-  getAveragePressure () {
+  getAverageWeatherResult (weatherParam) {
       const apiDayArr = this.props.weatherPerDay;
-      let avgPressureResult = 0;
-      apiDayArr.forEach(function(item) {
-        avgPressureResult += item.main.pressure;
+      let avgResult = 0;
+      apiDayArr.forEach(function (item) {
+        avgResult += item.main[weatherParam];
       });
 
-      return Math.round(avgPressureResult / apiDayArr.length)
-  }
-
-  getAverageHumidity () {
-      const apiDayArr = this.props.weatherPerDay;
-      let avgHumidityResult = 0;
-      apiDayArr.forEach(function(item) {
-        avgHumidityResult += item.main.humidity;
-      });
-
-      return Math.round(avgHumidityResult / apiDayArr.length)
+      return Math.round(avgResult / apiDayArr.length)
   }
 
   render() {
-    const { temperature, pressure, humidity } = this.getAverageResults ();
-console.log(this.props)
+    const { day, temperature, pressure, humidity } = this.getAverageResults ();
+
     return (
       <Fragment>
         <tr>
-          <th></th>
-          <th>{temperature}</th>
-          <th>{pressure}</th>
-          <th>{humidity}</th>
+          <td>{day}</td>
+          <td>{temperature}</td>
+          <td>{pressure}</td>
+          <td>{humidity}</td>
         </tr>
       </Fragment>
     )

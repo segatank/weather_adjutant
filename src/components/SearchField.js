@@ -38,7 +38,6 @@ class SearchField extends Component {
   }
 
   render() {
-    //console.log(this.props)
     return (
       <Fragment>
         <input

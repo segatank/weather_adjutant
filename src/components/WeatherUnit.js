@@ -44,17 +44,22 @@ class WeatherUnit extends Component {
 
 
   render() {
-    const noCityName = "Nothing to show. Please enter city name.";
+    const NO_CITY_NAME = "Nothing to show. Please enter city name.";
     console.log(this.props)
+    //const CITY_NAME = this.props.weather.city.name;
 
     if (!this.props.weather) {
-      return <div>{noCityName}</div>
+      return <div>{NO_CITY_NAME}</div>
     }
 
     return (
       <Fragment>
-          <div>Day # </div>
+        {!this.props.weather
+          ?
+          <div>{NO_CITY_NAME}</div>
+          :
           <table className="table table-hover">
+            <caption>Weather for {} city:</caption>
             <thead>
               <tr>
                 <th>Day #</th>
@@ -69,6 +74,7 @@ class WeatherUnit extends Component {
               }
             </tbody>
           </table>
+        }
       </Fragment>
     )
   }
