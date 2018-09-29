@@ -1,15 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from "react-redux";
 
-const FROM_KELVIN_TO_Celsius = 273;
+const FROM_KELVIN_TO_CELSIUS = 273;
 const convertToCelcius = (kelvin) => {
-  return kelvin - FROM_KELVIN_TO_Celsius
+  return kelvin - FROM_KELVIN_TO_CELSIUS
 }
 
 class SingleDayWeather extends Component {
-  constructor(props) {
-      super(props);
-  }
 
   getAverageResults () {
     return  {

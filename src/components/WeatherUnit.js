@@ -1,14 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import SingleDayWeather from './SingleDayWeather';
-
+import './WeatherUnit.css';
 
 class WeatherUnit extends Component {
 
   renderWeather(cityData) {
     console.log(cityData)
-    const name = cityData.city.name;
-
     const weatherDataFromApi = cityData.list;
     const daysCluster = [];
     const NUMBER_OF_DAYS = 5;
@@ -58,7 +56,7 @@ class WeatherUnit extends Component {
           ?
           <div>{NO_CITY_NAME}</div>
           :
-          <table className="table table-hover">
+          <table className="Weather-data-table">
             <caption>Weather for {} city:</caption>
             <thead>
               <tr>
