@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import SingleDayWeather from './SingleDayWeather';
 import './WeatherUnit.css';
 
+
 class WeatherUnit extends Component {
 
   renderWeather(cityData) {
-    console.log(cityData)
     const weatherDataFromApi = cityData.list;
     const daysCluster = [];
     const NUMBER_OF_DAYS = 5;
@@ -81,7 +81,8 @@ class WeatherUnit extends Component {
 
 const mapStateToProps = store => {
   return {
-    weather: store
+    weather: store.data,
+    message: store.status
   }
 }
 

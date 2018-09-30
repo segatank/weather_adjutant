@@ -1,12 +1,14 @@
-import { FETCH_WEATHER } from '../actions/ActionTypes'
+import { FETCH_WEATHER, FETCH_ERROR } from '../actions/ActionTypes'
 
 
-export function rootReducer (state = [], action) {
+export function rootReducer (state = {data: [], status: ''}, action) {
   switch(action.type) {
     case FETCH_WEATHER:
-      return [action.payload, ...state]
+    console.log(action)
+      return {data: [action.payload], status: 'ok'}
+    case FETCH_ERROR:
+      return {...state, status: 'error'}
     default:
       return state
   }
-  return state
 }

@@ -30,10 +30,9 @@ class SearchField extends Component {
       return
     }
 
-    if (event.target.value.length > 0) {
-      console.log(event.target.value);
-      this.setState({ city: event.target.value });
+    if (event.target.value.length > 0) {      
       this.props.fetchWeather(this.state.city);
+      this.setState({ city: event.target.value });
     }
   }
 
@@ -50,7 +49,7 @@ class SearchField extends Component {
         <button
           id="citySender"
           onClick={this.handlerButtonClick}>
-          Send
+          Search
         </button>
       </Fragment>
     )

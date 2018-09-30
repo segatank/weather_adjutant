@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
+const DAYS_OF_THE_WEEK = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const FROM_KELVIN_TO_CELSIUS = 273;
 const convertToCelcius = (kelvin) => {
   return kelvin - FROM_KELVIN_TO_CELSIUS
@@ -19,7 +21,7 @@ class SingleDayWeather extends Component {
   getDay () {
     const apiDayArr = this.props.weatherPerDay;
     const day = new Date(apiDayArr[0].dt_txt);
-    return day.getDate();
+    return `${day.getDate()} of ${MONTHS[day.getMonth()]}, ${DAYS_OF_THE_WEEK[day.getDay()]}`;
   }
 
   getAverageWeatherResult (weatherParam) {
