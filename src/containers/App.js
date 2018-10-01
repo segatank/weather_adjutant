@@ -16,7 +16,7 @@ class App extends Component {
         <p></p>
         <WeatherUnit />
       </div>
-    );
+    )
   }
 }
 
