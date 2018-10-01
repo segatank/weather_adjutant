@@ -1,15 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import SingleDayWeather from './SingleDayWeather';
+
 import './WeatherUnit.css';
 
+const NUMBER_OF_DAYS = 5;
 
 class WeatherUnit extends Component {
 
   renderWeather(cityData) {
     const weatherDataFromApi = cityData.list;
     const daysCluster = [];
-    const NUMBER_OF_DAYS = 5;
 
     for (let counter = 0; counter < NUMBER_OF_DAYS; counter++) {
       daysCluster.push([]);
@@ -19,21 +20,21 @@ class WeatherUnit extends Component {
     let currDate;
     let startCounter = 0;
 
-    for (let i=0; i < weatherDataFromApi.length; i++) {
-      currDate = new Date(weatherDataFromApi[i].dt_txt);
+    weatherDataFromApi.forEach(function(listItem) {
+      currDate = new Date(listItem.dt_txt);
 
       if (beginDate.getDate() === currDate.getDate()) {
-        daysCluster[startCounter].push(weatherDataFromApi[i]);
+        daysCluster[startCounter].push(listItem);
       } else {
         startCounter++;
         if (startCounter < NUMBER_OF_DAYS) {
           beginDate = currDate;
-          daysCluster[startCounter].push(weatherDataFromApi[i]);
+          daysCluster[startCounter].push(listItem);
         } else {
-          break;
+          return
         }
       }
-    }
+    })
 
     return (
         daysCluster.map((dayObject, index) => <SingleDayWeather weatherPerDay={dayObject} key={index} />)
@@ -43,7 +44,6 @@ class WeatherUnit extends Component {
 
   render() {
     const NO_CITY_NAME = "Nothing to show. Please enter city name.";
-    console.log(this.props)
     //const CITY_NAME = this.props.weather.city.name;
 
     if (!this.props.weather) {
@@ -51,29 +51,22 @@ class WeatherUnit extends Component {
     }
 
     return (
-      <Fragment>
-        {!this.props.weather
-          ?
-          <div>{NO_CITY_NAME}</div>
-          :
-          <table className="Weather-data-table">
-            <caption>Weather for {} city:</caption>
-            <thead>
-              <tr>
-                <th>Day #</th>
-                <th>Temperature (C)</th>
-                <th>Pressure (hPa)</th>
-                <th>Humidity (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                this.props.weather.map(this.renderWeather)
-              }
-            </tbody>
-          </table>
-        }
-      </Fragment>
+      <table className="Weather-data-table">
+        <caption>Weather for {} city:</caption>
+        <thead>
+          <tr>
+            <th>Day #</th>
+            <th>Temperature (C)</th>
+            <th>Pressure (hPa)</th>
+            <th>Humidity (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            this.props.weather.map(this.renderWeather)
+          }
+        </tbody>
+      </table>
     )
   }
 }

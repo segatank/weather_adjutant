@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-
 import SearchField from '../components/SearchField';
 import WeatherUnit from '../components/WeatherUnit';
 
+import './App.css';
 
 class App extends Component {
   render() {
