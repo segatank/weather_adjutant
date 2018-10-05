@@ -1,0 +1,15 @@
+
+.searchCityInput {
+  width: 33%;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  padding: 4px 2px 4px 2px;
+}
+
+.searchButton {
+  width: auto;
+  height: 34px;
+  display: inline-block;
+  padding: 5px 4px 2px 4px;
+}

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchWeather } from "../actions/ActionTypes";
 
+import './SearchField.css';
+
 const ENTER_KEY = 13;
 
 class SearchField extends Component {
@@ -27,10 +29,10 @@ class SearchField extends Component {
 
   handlerEnterKeyDown (event) {
     if (event.keyCode !== ENTER_KEY) {
-      return
+      return;
     }
 
-    if (event.target.value.length > 0) {      
+    if (event.target.value.length > 0) {
       this.props.fetchWeather(this.state.city);
       this.setState({ city: event.target.value });
     }
@@ -41,6 +43,7 @@ class SearchField extends Component {
       <Fragment>
         <input
           id="citySearchField"
+          className="searchCityInput"
           type="text"
           defaultValue = {this.state.city}
           onKeyDown = {this.handlerEnterKeyDown}
@@ -48,6 +51,7 @@ class SearchField extends Component {
         />
         <button
           id="citySender"
+          className="searchButton"
           onClick={this.handlerButtonClick}>
           Search
         </button>

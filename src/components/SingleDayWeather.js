@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { MONTHS, DAYS_OF_THE_WEEK } from '../Constants';
+import {
+  MONTHS,
+  DAYS_OF_THE_WEEK,
+  convertToCelcius
+} from '../Constants';
 
-const FROM_KELVIN_TO_CELSIUS = 273;
-const convertToCelcius = (kelvin) => {
-  return kelvin - FROM_KELVIN_TO_CELSIUS
-}
 
 class SingleDayWeather extends Component {
 
   getAverageResults () {
-    return  {
+    return {
       day: this.getDay(),
       temperature: convertToCelcius(this.getAverageWeatherResult ('temp')),
       pressure: this.getAverageWeatherResult ('pressure'),
@@ -20,17 +20,18 @@ class SingleDayWeather extends Component {
   getDay () {
     const apiDayArr = this.props.weatherPerDay;
     const day = new Date(apiDayArr[0].dt_txt);
-    return `${day.getDate()} of ${MONTHS[day.getMonth()]}, ${DAYS_OF_THE_WEEK[day.getDay()]}`
+
+    return `${day.getDate()} of ${MONTHS[day.getMonth()]}, ${DAYS_OF_THE_WEEK[day.getDay()]}`;
   }
 
   getAverageWeatherResult (weatherParam) {
-      const apiDayArr = this.props.weatherPerDay;
-      let avgResult = 0;
-      apiDayArr.forEach(function (item) {
-        avgResult += item.main[weatherParam];
-      });
+    const apiDayArr = this.props.weatherPerDay;
+    let avgResult = 0;
+    apiDayArr.forEach(function (item) {
+      avgResult += item.main[weatherParam];
+    });
 
-      return Math.round(avgResult / apiDayArr.length)
+    return Math.round(avgResult / apiDayArr.length);
   }
 
   render() {

@@ -5,9 +5,8 @@ import { rootReducer } from '../reducers/RootReducer'
 
 
 const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk)
-  );
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
 export default store;
-
