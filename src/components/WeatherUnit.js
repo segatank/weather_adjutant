@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import SingleDayWeather from './SingleDayWeather';
 
 import './WeatherUnit.css';
@@ -7,7 +7,6 @@ import './WeatherUnit.css';
 const NUMBER_OF_DAYS = 5;
 
 class WeatherUnit extends Component {
-
   renderWeather(cityData) {
     const weatherDataFromApi = cityData.list;
     const daysCluster = [];
@@ -31,23 +30,22 @@ class WeatherUnit extends Component {
           beginDate = currDate;
           daysCluster[startCounter].push(listItem);
         } else {
-          return
+          return;
         }
       }
-    })
+    });
 
-    return (
-        daysCluster.map((dayObject, index) => <SingleDayWeather weatherPerDay={dayObject} key={index} />)
-    )
+    return daysCluster.map((dayObject, index) => (
+      <SingleDayWeather weatherPerDay={dayObject} key={index} />
+    ));
   }
 
-
   render() {
-    const NO_CITY_NAME = "Nothing to show. Please enter city name.";
+    const NO_CITY_NAME = 'Nothing to show. Please enter city name.';
     //const CITY_NAME = this.props.weather.city.name;
 
     if (!this.props.weather) {
-      return <div>{NO_CITY_NAME}</div>
+      return <div>{NO_CITY_NAME}</div>;
     }
 
     return (
@@ -61,22 +59,17 @@ class WeatherUnit extends Component {
             <th>Humidity (%)</th>
           </tr>
         </thead>
-        <tbody>
-          {
-            this.props.weather.map(this.renderWeather)
-          }
-        </tbody>
+        <tbody>{this.props.weather.map(this.renderWeather)}</tbody>
       </table>
-    )
+    );
   }
 }
-
 
 const mapStateToProps = store => {
   return {
     weather: store.data,
-    message: store.status
-  }
-}
+    message: store.status,
+  };
+};
 
 export default connect(mapStateToProps)(WeatherUnit);

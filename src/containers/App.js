@@ -11,12 +11,12 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Weather adjutant welcomes you!</h1>
         </header>
-        <p></p>
+        <p />
         <SearchField />
-        <p></p>
+        <p />
         <WeatherUnit />
       </div>
-    )
+    );
   }
 }
 
