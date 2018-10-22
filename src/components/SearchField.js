@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWeather } from '../actions/ActionTypes';
+import { fetchWeather } from '../actions/Actions';
 
 import './SearchField.css';
 

@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { MONTHS, DAYS_OF_THE_WEEK, convertToCelcius } from '../Constants';
+import {
+  MONTHS,
+  DAYS_OF_THE_WEEK,
+  convertToCelcius
+} from '../assets/Constants';
+
 
 class SingleDayWeather extends Component {
   getAverageResults() {
@@ -15,14 +20,15 @@ class SingleDayWeather extends Component {
     const apiDayArr = this.props.weatherPerDay;
     const day = new Date(apiDayArr[0].dt_txt);
 
-    return `${day.getDate()} of ${MONTHS[day.getMonth()]}, ${
-      DAYS_OF_THE_WEEK[day.getDay()]
-    }`;
+    return `${day.getDate()} of
+              ${MONTHS[day.getMonth()]},
+              ${DAYS_OF_THE_WEEK[day.getDay()]}`;
   }
 
   getAverageWeatherResult(weatherParam) {
     const apiDayArr = this.props.weatherPerDay;
     let avgResult = 0;
+    
     apiDayArr.forEach(function(item) {
       avgResult += item.main[weatherParam];
     });
