@@ -1,29 +1,31 @@
-const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 
-let config = {
-  entry: './src/index.js',
+module.exports = {
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, './public'),
-    filename: 'output.js'
+      filename: 'output.js',
+      path: path.resolve(__dirname, 'public')
   },
   module: {
     rules: [
       {
-        test: /\.js$|\.jsx$/,
-        exclude: /node_modules|build/,
-        loader: "babel-loader"
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
-  devServer: {
-    contentBase: path.resolve (__dirname, './public'),
-    historyApiFallback: true,
-    inline: true,
-    open: true
-  },
-  devtool: 'eval-source-map'
-}
-
-
-module.exports = config;
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+  ]
+};

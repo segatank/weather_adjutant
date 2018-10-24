@@ -6,6 +6,9 @@
 
 # production
 /build
+/dist
+output.js
+main.css
 
 # misc
 .DS_Store
