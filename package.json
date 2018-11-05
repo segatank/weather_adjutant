@@ -33,10 +33,9 @@
     "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
-    "wp_s": "webpack-dev-server --mode development --open",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "imp-look": "prettier --single-quote --trailing-comma es5 --write \"src/**/*.js\""
