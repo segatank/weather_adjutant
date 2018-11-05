@@ -36,9 +36,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --config wp.config/webpack.dev.config.js --open --hot",
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "predeploy": "npm run build",
+    "build": "webpack --mode production --config wp.config/webpack.prod.config.js",
     "deploy": "gh-pages -d build",
     "imp-look": "prettier --single-quote --trailing-comma es5 --write \"src/**/*.js\""
   }
