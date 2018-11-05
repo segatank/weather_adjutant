@@ -5,10 +5,10 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const APP_DIR = path.resolve(__dirname, './src');
-const BUILD_DIR = path.resolve(__dirname, 'public');
+const APP_DIR = path.resolve(__dirname, '../src');
+const BUILD_DIR = path.resolve(__dirname, '../build');
 
-//  entry: "./src/index.js",  //old entry
+
 module.exports = {
   entry: ['@babel/polyfill', APP_DIR],
   output: {
@@ -33,7 +33,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: './build/index.html'
+      filename: './index.html'
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
