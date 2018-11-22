@@ -7,7 +7,12 @@ table {
   table-layout: fixed;
   width: 100%;
   border-collapse: collapse;
-  border: 3px solid steelblue;
+  border: 3px solid #626D71;
+}
+
+tr {
+  border-collapse: collapse;
+  border: 2px dashed #626D71;
 }
 
 thead th:nth-child(1) {
@@ -30,11 +35,6 @@ th, td {
   padding: 20px;
 }
 
-
-html {
-  font-family: 'helvetica neue', helvetica, arial, sans-serif;
-}
-
 thead th, tfoot th {
   font-family: 'KoHo';
 }
@@ -51,16 +51,12 @@ tbody td {
   text-align: center;
 }
 
-/* tfoot th {
-  text-align: right;
-} */
-
 thead, tfoot {
   color: white;
   text-shadow: 1px 1px 1px black;
 }
 
 thead th, tfoot th, tfoot td {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
-  border: 3px solid grey;
+  background-color: #CDCDC0;
+  border: 3px solid #626D71;
 }
